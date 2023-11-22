@@ -467,6 +467,7 @@
                     >
                     <a
                         href="javascript:void(0)"
+                        @click="logout()"
                         class="bg-red-600 px-4 py-2 font-bold rounded text-white hover:bg-red-500"
                         >Logout</a
                     >
@@ -1017,6 +1018,20 @@ const deleteData = (id) => {
                 .catch((err) => {
                     console.log(err);
                 });
+        }
+    });
+};
+
+const logout = () => {
+    Swal.fire({
+        title: "Confirmation",
+        icon: "info",
+        text: "Are you sure want to logout?",
+        showCancelButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.clear();
+            window.location.replace("/");
         }
     });
 };
