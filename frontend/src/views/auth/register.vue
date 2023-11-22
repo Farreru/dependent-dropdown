@@ -9,7 +9,6 @@
                             <label for="username">Username</label>
                             <input
                                 type="text"
-                                required
                                 v-model="userForm.username"
                                 placeholder="Username"
                                 class="block px-2 py-1 ring-1 ring-inset ring-gray-300 text-black w-full rounded-md"
@@ -21,7 +20,6 @@
                             <label for="email">Email</label>
                             <input
                                 type="email"
-                                required
                                 v-model="userForm.email"
                                 placeholder="Email"
                                 class="block px-2 py-1 ring-1 ring-inset ring-gray-300 text-black w-full rounded-md"
@@ -33,7 +31,6 @@
                             <label for="password">Password</label>
                             <input
                                 type="password"
-                                required
                                 v-model="userForm.password"
                                 placeholder="Password"
                                 class="block px-2 py-1 ring-1 ring-inset ring-gray-300 text-black w-full rounded-md"
@@ -72,6 +69,12 @@ const userForm = ref({
     password: "",
 });
 
+const resetUserForm = (userForm.value = {
+    username: "",
+    email: "",
+    password: "",
+});
+
 const register = () => {
     axios
         .post(`${baseURL}/auth/register`, userForm.value)
@@ -95,8 +98,11 @@ const register = () => {
                 Swal.fire({
                     title: "Terjadi Kesalahan!",
                     icon: "error",
-                    text: JSON.stringify(res.response.data.error),
+                    text: JSON.stringify(
+                        Object.values(err.response.data.error)[0]
+                    ).replace(/[\[\]"]+/g, ""),
                 });
+                resetUserForm();
             }
         });
 };

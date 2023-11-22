@@ -89,8 +89,11 @@ const login = () => {
                 Swal.fire({
                     title: "Terjadi Kesalahan!",
                     icon: "error",
-                    text: JSON.stringify(res.response.data.error),
+                    text: JSON.stringify(
+                        Object.values(err.response.data.error)[0]
+                    ).replace(/[\[\]"]+/g, ""),
                 });
+                resetCredentials();
             }
         });
 };
