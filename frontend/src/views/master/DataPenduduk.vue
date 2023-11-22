@@ -896,6 +896,7 @@ const insertData = () => {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             showModal.value = false;
+                            onChangeTableProvinsi();
                         }
                     });
                 }
