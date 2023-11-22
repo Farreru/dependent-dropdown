@@ -130,7 +130,7 @@ class DataPendudukController extends Controller
             'DataKecamatan',
             'DataKelurahanAtauDesa',
             'DataAgama'
-        )->find($id)->first();
+        )->find($id);
 
         if (!$data) {
             return response()->json(['success' => false, 'message' => 'Not found'], 404);
