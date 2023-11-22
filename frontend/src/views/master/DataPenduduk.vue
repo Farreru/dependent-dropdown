@@ -356,6 +356,8 @@
                                         name="rt"
                                         :readonly="detailsMode"
                                         v-model="DataForm.rt"
+                                        min="0"
+                                        max="20"
                                         id="rt"
                                         placeholder="RT..."
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5"
@@ -373,6 +375,8 @@
                                         v-model="DataForm.rw"
                                         :readonly="detailsMode"
                                         id="rw"
+                                        min="0"
+                                        max="20"
                                         placeholder="RW..."
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-1.5"
                                     />
