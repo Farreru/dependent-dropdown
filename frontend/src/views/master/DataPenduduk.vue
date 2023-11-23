@@ -807,11 +807,9 @@ const onChangeTableProvinsi = () => {
 };
 
 const onChangeProvinsi = () => {
-    if (!detailsMode || !editMode) {
-        DataForm.value.kota_atau_kabupaten_id = "";
-        DataForm.value.kecamatan_id = "";
-        DataForm.value.kelurahan_atau_desa_id = "";
-    }
+    DataForm.value.kota_atau_kabupaten_id = "";
+    DataForm.value.kecamatan_id = "";
+    DataForm.value.kelurahan_atau_desa_id = "";
     if (DataForm.value.provinsi_id !== "") {
         axios
             .get(
@@ -833,10 +831,8 @@ const onChangeProvinsi = () => {
 };
 
 const onChangeKotaAtauKabupaten = () => {
-    if (!detailsMode || !editMode) {
-        DataForm.value.kecamatan_id = "";
-        DataForm.value.kelurahan_atau_desa_id = "";
-    }
+    DataForm.value.kecamatan_id = "";
+    DataForm.value.kelurahan_atau_desa_id = "";
     if (DataForm.value.kota_atau_kabupaten_id !== "") {
         axios
             .get(
@@ -858,9 +854,7 @@ const onChangeKotaAtauKabupaten = () => {
 };
 
 const onChangeKecamatan = () => {
-    if (!detailsMode || !editMode) {
-        DataForm.value.kelurahan_atau_desa_id = "";
-    }
+    DataForm.value.kelurahan_atau_desa_id = "";
     if (DataForm.value.kecamatan_id !== "") {
         axios
             .get(
@@ -979,9 +973,61 @@ const detailsData = (id) => {
                     status_perkawinan: data.status_perkawinan,
                     pekerjaan: data.pekerjaan,
                 };
-                onChangeProvinsi();
-                onChangeKotaAtauKabupaten();
-                onChangeKecamatan();
+
+                if (DataForm.value.provinsi_id !== "") {
+                    axios
+                        .get(
+                            `${baseURL}/data-penduduk/list-kota-atau-kabupaten/${DataForm.value.provinsi_id}`,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${token}`,
+                                },
+                            }
+                        )
+                        .then((res) => {
+                            let { kota_atau_kabupaten } = res.data;
+                            ListKotaAtauKabupaten.value = kota_atau_kabupaten;
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+                if (DataForm.value.kota_atau_kabupaten_id !== "") {
+                    axios
+                        .get(
+                            `${baseURL}/data-penduduk/list-kecamatan/${DataForm.value.kota_atau_kabupaten_id}`,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${token}`,
+                                },
+                            }
+                        )
+                        .then((res) => {
+                            let { kecamatan } = res.data;
+                            ListKecamatan.value = kecamatan;
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+                if (DataForm.value.kecamatan_id !== "") {
+                    axios
+                        .get(
+                            `${baseURL}/data-penduduk/list-kelurahan-atau-desa/${DataForm.value.kecamatan_id}`,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${token}`,
+                                },
+                            }
+                        )
+                        .then((res) => {
+                            let { kelurahan_atau_desa } = res.data;
+                            ListKelurahanAtauDesa.value = kelurahan_atau_desa;
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
                 loading.value = false;
                 showModal.value = true;
             }
