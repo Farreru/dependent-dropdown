@@ -1,24 +1,27 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { login } from "../views/login";
-import { register } from "../views/register";
-import http from "../http";
+import axios from "axios";
 import auth from "../middleware/auth";
-import { data_penduduk } from "../views/data_penduduk";
+import LoginPage from "../views/login.vue";
+import RegisterPage from "../views/register.vue";
+import DataPendudukPage from "../views/dataPenduduk.vue";
+
+const baseURL = import.meta.env.VITE_API_URL;
+
 const routes = [
     {
         path: "/",
         name: "LoginPage",
-        component: login,
+        component: LoginPage,
     },
     {
         path: "/register",
         name: "RegisterPage",
-        component: register,
+        component: RegisterPage,
     },
     {
         path: "/data-penduduk",
         name: "DataPendudukPage",
-        component: data_penduduk,
+        component: DataPendudukPage,
         meta: {
             middleware: [auth],
         },
@@ -32,25 +35,26 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.meta.middleware) {
-        const middleware: any = to.meta.middleware;
-        middleware.forEach((mw: any) => mw(to, from, next));
+        const middleware = to.meta.middleware;
+        middleware.forEach((mw) => mw(to, from, next));
     } else {
         next();
     }
 
     if (to.name === "LoginPage") {
         const token = localStorage.getItem("token");
-        http.get(`/auth/check-token`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
-            .then((res: any) => {
+        axios
+            .get(`${baseURL}/auth/check-token`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => {
                 if (res.data.success) {
                     router.push("/data-penduduk");
                 }
             })
-            .catch((err: any) => {
+            .catch((err) => {
                 if (err.response.status == 401) {
                     return null;
                 }

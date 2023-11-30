@@ -1,36 +1,32 @@
 import { defineComponent, ref } from "vue";
 import Swal from "sweetalert2";
 import http from "../http";
+import { useRouter } from "vue-router";
 
 export const login = defineComponent({
     setup() {
+        const route = useRouter();
+
         const credentials = ref({
             email: "",
             password: "",
         });
-
-        const resetCredentials = () => {
-            credentials.value = {
-                email: "",
-                password: "",
-            };
-        };
 
         const submit = (e: Event) => {
             e.preventDefault();
             http.post(`/auth/login`, credentials.value)
                 .then((res) => {
                     if (res.data.success) {
-                        // localStorage.setItem("token", res.data.token);
+                        localStorage.setItem("token", res.data.token);
                         Swal.fire({
                             title: "Aksi Berhasil!",
                             icon: "success",
                             text: "Login Success",
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                // window.location.replace("/data-penduduk");
+                                route.push("/data-penduduk");
                             } else {
-                                // window.location.replace("/data-penduduk");
+                                route.push("/data-penduduk");
                             }
                         });
                     }
