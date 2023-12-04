@@ -24,9 +24,9 @@ const submit = () => {
                     text: "Login Success",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        router.push("/data-penduduk");
+                        router.push("/admin");
                     } else {
-                        router.push("/data-penduduk");
+                        router.push("/admin");
                     }
                 });
             }
