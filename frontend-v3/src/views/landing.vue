@@ -98,7 +98,10 @@ const clear = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td v-if="listTable === null" colspan="6">
+                            <td
+                                v-if="listTable && listTable.length < 1"
+                                colspan="8"
+                            >
                                 Data tidak ditemukan
                             </td>
                         </tr>
