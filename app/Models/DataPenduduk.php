@@ -10,6 +10,7 @@ class DataPenduduk extends Model
     use HasFactory;
     protected $table = 'data_penduduk';
     protected $fillable = [
+        'nik',
         'name',
         'tanggal_lahir',
         'jenis_kelamin',
@@ -42,7 +43,7 @@ class DataPenduduk extends Model
 
     function DataKelurahanAtauDesa()
     {
-        return $this->belongsTo(Village::class, 'kelurahan_id', 'id');
+        return $this->belongsTo(Village::class, 'kelurahan_atau_desa_id', 'id');
     }
 
     function DataAgama()

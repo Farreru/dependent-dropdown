@@ -31,6 +31,17 @@ class DataPendudukController extends Controller
         return response()->json(['success' => true, 'list' => $data]);
     }
 
+    public function cariNik($nik)
+    {
+        $data = DataPenduduk::with(
+            'DataProvinsi',
+            'DataKotaAtauKabupaten',
+            'DataKecamatan',
+            'DataKelurahanAtauDesa'
+        )->where('nik', $nik)->get();
+        return response()->json(['success' => true, 'penduduk' => $data]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -83,6 +94,7 @@ class DataPendudukController extends Controller
     {
         //
         $validator = Validator::make($request->all(), [
+            'nik' => 'required|string|unique:data_penduduk,nik',
             'name' => 'required|string',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required',
@@ -146,6 +158,7 @@ class DataPendudukController extends Controller
     {
         //
         $validator = Validator::make($request->all(), [
+            'nik' => 'required|string',
             'name' => 'required|string',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|string',

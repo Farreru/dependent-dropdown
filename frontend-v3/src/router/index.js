@@ -4,12 +4,17 @@ import auth from "../middleware/auth";
 import LoginPage from "../views/login.vue";
 import RegisterPage from "../views/register.vue";
 import DataPendudukPage from "../views/dataPenduduk.vue";
-
+import LandingPage from "../views/landing.vue";
 const baseURL = import.meta.env.VITE_API_URL;
 
 const routes = [
     {
         path: "/",
+        name: "LandingPage",
+        component: LandingPage,
+    },
+    {
+        path: "/login",
         name: "LoginPage",
         component: LoginPage,
     },
@@ -19,7 +24,7 @@ const routes = [
         component: RegisterPage,
     },
     {
-        path: "/data-penduduk",
+        path: "/admin",
         name: "DataPendudukPage",
         component: DataPendudukPage,
         meta: {
@@ -51,7 +56,7 @@ router.beforeEach((to, from, next) => {
             })
             .then((res) => {
                 if (res.data.success) {
-                    router.push("/data-penduduk");
+                    router.push("/admin");
                 }
             })
             .catch((err) => {

@@ -26,6 +26,7 @@ const logout = () => {
 
 const DataForm = ref({
     id: "",
+    nik: "",
     name: "",
     tanggal_lahir: "",
     jenis_kelamin: "",
@@ -48,6 +49,7 @@ const loading = ref(false);
 const clearForm = () => {
     DataForm.value = {
         id: "",
+        nik: "",
         name: "",
         tanggal_lahir: "",
         jenis_kelamin: "",
@@ -486,6 +488,7 @@ const submit = () => {
                                 <thead>
                                     <tr>
                                         <th>No.</th>
+                                        <th>NIK</th>
                                         <th>Nama</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Jenis Kelamin</th>
@@ -509,6 +512,7 @@ const submit = () => {
                                         :key="data.id"
                                     >
                                         <td>{{ i + 1 }}</td>
+                                        <td>{{ data.nik }}</td>
                                         <td>{{ data.name }}</td>
                                         <td>{{ data.tanggal_lahir }}</td>
                                         <td>{{ data.jenis_kelamin }}</td>
@@ -593,6 +597,22 @@ const submit = () => {
                     </div>
                     <div class="modal-body">
                         <form @submit.prevent="submit">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="nik">NIK</label>
+                                        <input
+                                            type="text"
+                                            placeholder="NIK"
+                                            class="form-control"
+                                            id="nik"
+                                            :readonly="detailsMode"
+                                            v-model="DataForm.nik"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row mb-3">
                                 <div class="col">
                                     <div class="form-group">

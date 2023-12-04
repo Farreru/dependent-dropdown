@@ -30,3 +30,5 @@ Route::middleware('jwtauth')->group(function () {
     Route::get('/data-penduduk/list-kecamatan/{id}', [DataPendudukController::class, 'listKecamatanByKotaAtauKabupatenID']);
     Route::get('/data-penduduk/list-kelurahan-atau-desa/{id}', [DataPendudukController::class, 'listKelurahanAtauDesaByKecamatanID']);
 });
+
+Route::get('/data-penduduk/nik/{nik}', [DataPendudukController::class, 'cariNik']);
