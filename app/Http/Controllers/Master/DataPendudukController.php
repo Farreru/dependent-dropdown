@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class DataPendudukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request)
     {
         //
@@ -42,9 +40,6 @@ class DataPendudukController extends Controller
         return response()->json(['success' => true, 'penduduk' => $data]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
@@ -87,9 +82,6 @@ class DataPendudukController extends Controller
         return response()->json(['success' => true, 'kelurahan_atau_desa' => $kelurahanAtauDesa], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
@@ -121,18 +113,6 @@ class DataPendudukController extends Controller
         return response()->json(['success' => true, 'message' => 'Insert new data success'], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        //
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
@@ -151,9 +131,6 @@ class DataPendudukController extends Controller
         return response()->json(['success' => true, 'data' => $data]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
@@ -190,9 +167,6 @@ class DataPendudukController extends Controller
         return response()->json(['success' => true, 'message' => 'Update data success'], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
