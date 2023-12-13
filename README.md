@@ -1,5 +1,5 @@
 <p>
-    Untuk menjalankan vueJS ada pada folder "./frontend"
+    Untuk menjalankan **VueJS** ada pada folder "./frontend" <br>
     dengan cara melakukan perintah di terminal seperti berikut ini
     <code>npm run dev</code>
 </p>
