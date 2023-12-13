@@ -1,5 +1,5 @@
 <p>
-    Untuk menjalankan **VueJS** ada pada folder "./frontend" <br>
+    Untuk menjalankan <b>VueJS 3</b> ada pada folder "./frontend" <br>
     dengan cara melakukan perintah di terminal seperti berikut ini
     <code>npm run dev</code>
 </p>
